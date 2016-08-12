@@ -72,51 +72,108 @@
     <!-- Content -->
         <div class="row">
             <h2>Sản phẩm mới nhất</h2>
-			<div class="col-md-3 product">
-                    <img src="img/sp1.jpg" width="250" height="190"/>
-                    <div class="row text-center" style="border-bottom:1px #0CF solid">
-                        <div class="col-md-6 text-center b1"><a href="#">Giỏ hàng</a></div>                          
-                        <div class="col-md-6 text-center b1"><a href="#">Chi tiết</a></div>
-                    </div>
-                    <div class="captionProduct">
-                        <p align="center"><a href="#">Ten san pham</a></p>
-                        <p align="justify">Gel vuốt tóc nam cao cấp Osis+ 4 Rock Hard là dòng sản phẩm cao cấp của hãng Schwarzkopf Đức. Sản phẩm với độ giữ nếp cao.</p>
-                    </div>
-                </div>
-                <div class="col-md-3 product">
-                    <img src="img/sp1.jpg" width="250" height="190"/>
-                    <div class="row text-center">
-                        <div class="col-md-6 text-center b1"><a href="#">Giỏ hàng</a></div>                          
-                        <div class="col-md-6 text-center b1"><a href="#">Chi tiết</a></div>
-                    </div>
-                    <div class="captionProduct">
-                        <p align="center"><a href="#">Ten san pham</a></p>
-                        <p align="justify">Gel vuốt tóc nam cao cấp Osis+ 4 Rock Hard là dòng sản phẩm cao cấp của hãng Schwarzkopf Đức. Sản phẩm với độ giữ nếp cao.</p>
-                    </div>
-                </div>
-                <div class="col-md-3 product">
-                    <img src="img/sp1.jpg" width="250" height="190"/>
-                    <div class="row text-center">
-                        <div class="col-md-6 text-center b1"><a href="#">Giỏ hasdasdàng1</a></div>                          
-                    </div>
-                    <div class="captionProduct">
-                        <p align="center"><a href="#">Ten san pham</a></p>
-                        <p align="justify">Gel vuốt tóc nam cao cấp Osis+ 4 Rock Hard là dòng sản phẩm cao cấp của hãng Schwarzkopf Đức. Sản phẩm với độ giữ nếp cao.</p>
-                    </div>
-                </div>
-                <div class="col-md-3 product">
-                    <img src="img/sp1.jpg" width="250" height="190"/>
-                    <div class="price"><span class="old_price">1100</span> 1000</div>
-                    <div class="row text-center">
-                        <div class="col-md-6 text-center b1"><a href="#">Giỏ hàng</a></div>                          
-                        <div class="col-md-6 text-center b1"><a href="#">Chi tiết</a></div>
-                    </div>
-                    <div class="captionProduct">
-                        <p align="center"><a href="#">Ten san pham</a></p>
-                        <p align="justify">Gel vuốt tóc nam cao cấp Osis+ 4 Rock Hard là dòng sản phẩm cao cấp của hãng Schwarzkopf Đức. Sản phẩm với độ giữ nếp cao.</p>
-                    </div>
-                </div>
-                
+                    <asp:ListView ID="ListView1" runat="server" DataSourceID="SqlDataSource1" GroupItemCount="3">
+                        <AlternatingItemTemplate>
+                            <td runat="server" style="">
+                                <div class="row">
+                                    <img src="img/sp1.jpg" width="100%" />
+                                    <h4 align="center"><asp:Label ID="Label1" runat="server" Text='<%# Eval("name") %>' /></h4>
+                                    <div class="row">
+                                	    <div class="col-md-6"><asp:Label ID="Label2" runat="server" Text='<%# Eval("price") %>' /></div>
+                                        <div class="col-md-6"><a href="#">Xem</a></div>
+                                    </div>
+                                    <p class="text-justify"><asp:Label ID="Label3" runat="server" Text='<%# Eval("description") %>' /></p>
+                                </div>
+                                </td>
+                        </AlternatingItemTemplate>
+                        <EditItemTemplate>
+                            <td runat="server" style="">name:
+                                <asp:TextBox ID="nameTextBox" runat="server" Text='<%# Bind("name") %>' />
+                                <br />price:
+                                <asp:TextBox ID="priceTextBox" runat="server" Text='<%# Bind("price") %>' />
+                                <br />description:
+                                <asp:TextBox ID="descriptionTextBox" runat="server" Text='<%# Bind("description") %>' />
+                                <br />
+                                <asp:Button ID="UpdateButton" runat="server" CommandName="Update" Text="Update" />
+                                <br />
+                                <asp:Button ID="CancelButton" runat="server" CommandName="Cancel" Text="Cancel" />
+                                <br /></td>
+                        </EditItemTemplate>
+                        <EmptyDataTemplate>
+                            <table runat="server" style="">
+                                <tr>
+                                    <td>No data was returned.</td>
+                                </tr>
+                            </table>
+                        </EmptyDataTemplate>
+                        <EmptyItemTemplate>
+<td runat="server" />
+                        </EmptyItemTemplate>
+                        <GroupTemplate>
+                            <tr id="itemPlaceholderContainer" runat="server">
+                                <td id="itemPlaceholder" runat="server"></td>
+                            </tr>
+                        </GroupTemplate>
+                        <InsertItemTemplate>
+                            <td runat="server" style="">name:
+                                <asp:TextBox ID="nameTextBox" runat="server" Text='<%# Bind("name") %>' />
+                                <br />price:
+                                <asp:TextBox ID="priceTextBox" runat="server" Text='<%# Bind("price") %>' />
+                                <br />description:
+                                <asp:TextBox ID="descriptionTextBox" runat="server" Text='<%# Bind("description") %>' />
+                                <br />
+                                <asp:Button ID="InsertButton" runat="server" CommandName="Insert" Text="Insert" />
+                                <br />
+                                <asp:Button ID="CancelButton" runat="server" CommandName="Cancel" Text="Clear" />
+                                <br /></td>
+                        </InsertItemTemplate>
+                        <ItemTemplate>
+                            <td runat="server" style="">
+                                <div class="row">
+                                    <img src="img/sp1.jpg" width="100%" />
+                                    <h4 align="center"><asp:Label ID="Label1" runat="server" Text='<%# Eval("name") %>' /></h4>
+                                    <div class="row">
+                                	    <div class="col-md-6"><asp:Label ID="Label2" runat="server" Text='<%# Eval("price") %>' /></div>
+                                        <div class="col-md-6"><a href="#">Xem</a></div>
+                                    </div>
+                                    <p class="text-justify"><asp:Label ID="Label3" runat="server" Text='<%# Eval("description") %>' /></p>
+                                </div>
+                            </td>
+                        </ItemTemplate>
+                        <LayoutTemplate>
+                            <table runat="server">
+                                <tr runat="server">
+                                    <td runat="server">
+                                        <table id="groupPlaceholderContainer" runat="server" border="0" style="">
+                                            <tr id="groupPlaceholder" runat="server">
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr runat="server">
+                                    <td runat="server" style="">
+                                        <asp:DataPager ID="DataPager1" runat="server" PageSize="12">
+                                            <Fields>
+                                                <asp:NextPreviousPagerField ButtonType="Button" ShowFirstPageButton="True" ShowNextPageButton="False" ShowPreviousPageButton="False" />
+                                                <asp:NumericPagerField />
+                                                <asp:NextPreviousPagerField ButtonType="Button" ShowLastPageButton="True" ShowNextPageButton="False" ShowPreviousPageButton="False" />
+                                            </Fields>
+                                        </asp:DataPager>
+                                    </td>
+                                </tr>
+                            </table>
+                        </LayoutTemplate>
+                        <SelectedItemTemplate>
+                            <td runat="server" style="">name:
+                                <asp:Label ID="nameLabel" runat="server" Text='<%# Eval("name") %>' />
+                                <br />price:
+                                <asp:Label ID="priceLabel" runat="server" Text='<%# Eval("price") %>' />
+                                <br />description:
+                                <asp:Label ID="descriptionLabel" runat="server" Text='<%# Eval("description") %>' />
+                                <br /></td>
+                        </SelectedItemTemplate>
+                    </asp:ListView>
+                    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:qlchConnectionString %>" SelectCommand="SELECT [name], [price], [description] FROM [product]"></asp:SqlDataSource>
         </div>
 </div>
 <footer class="footer">
